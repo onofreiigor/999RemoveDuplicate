@@ -25,26 +25,16 @@ function RemoveDublicateFrom999()
 {
 
     var adItems = $("#js-ads-container").children("ul.ads-list-detail:first").children("li");
-    console.log("Lis: " + adItems.length);
-    adCount += adItems.length;
-    console.log("Count: " + adCount);
+    var parsedItems = [];
+    console.log("List: " + adItems.length);
     
     for (i = 0; i < adItems.length; i++)
     {
-        //console.log($(adItems[i]).html());
-        //$(adItems[i]).hide();
+        var itemId;
+        var src = $(adItems[i]).children("div.ads-list-detail-item-thumb:first").children("a:first").children("img:first").attr("src");
+        console.log("Img src: " + src);
     }
-
-    var item = {id: "", name: "", desc: ""};
-    var items = [];
 
     //items.push(item);
     //items.push({id: "3", name: "test", desc: "test"});
-
-    for (i = 0; i < items.length; i++)
-    {
-        console.log("Id: " + items[i].id);
-        console.log("Name: " + items[i].name);
-        console.log("Desc: " + items[i].desc);
-    }
 }
