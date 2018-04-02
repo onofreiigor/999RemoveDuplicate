@@ -19,7 +19,7 @@ function gotMessage (message, sender, sendResponse)
 }
 
 var adCount = 0;
-//var adItems = [];
+var parsedItems = [];
 
 function RemoveDublicateFrom999()
 {
@@ -32,9 +32,28 @@ function RemoveDublicateFrom999()
     {
         var itemId;
         var src = $(adItems[i]).children("div.ads-list-detail-item-thumb:first").children("a:first").children("img:first").attr("src");
-        console.log("Img src: " + src);
+        var title = $(adItems[i]).children("div.ads-list-detail-item-title:first").children("a:first").text();
+        var desc = $(adItems[i]).children("div.ads-list-detail-item-intro:first").text();
+        //console.log("Img src: " + src);
+        console.log("Title: " + title);
+        console.log("Desc: " + desc);
+        if (CheckIfExist(title, desc) == true)
+        {
+            var item  = {title: title, desc: desc};
+            parsedItems.push(item);
+        }
     }
 
     //items.push(item);
-    //items.push({id: "3", name: "test", desc: "test"});
+    //items.push({id: "3", name: "test", desc: "test"}); 
+}
+
+function CheckIfExist(title, desc)
+{
+    for (i = 0; i < parsedItems.length; i++)
+    {
+        
+    }
+
+    return true;
 }
