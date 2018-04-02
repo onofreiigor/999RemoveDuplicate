@@ -23,37 +23,56 @@ var parsedItems = [];
 
 function RemoveDublicateFrom999()
 {
-
+    var duplicateCount = 0;
+    
     var adItems = $("#js-ads-container").children("ul.ads-list-detail:first").children("li");
     var parsedItems = [];
     console.log("List: " + adItems.length);
     
-    for (i = 0; i < adItems.length; i++)
+    for (var i = 0; i < adItems.length; i++)
     {
         var itemId;
-        var src = $(adItems[i]).children("div.ads-list-detail-item-thumb:first").children("a:first").children("img:first").attr("src");
+        //var src = $(adItems[i]).children("div.ads-list-detail-item-thumb:first").children("a:first").children("img:first").attr("src");
         var title = $(adItems[i]).children("div.ads-list-detail-item-title:first").children("a:first").text();
         var desc = $(adItems[i]).children("div.ads-list-detail-item-intro:first").text();
         //console.log("Img src: " + src);
-        console.log("Title: " + title);
-        console.log("Desc: " + desc);
-        if (CheckIfExist(title, desc) == true)
+        //console.log("Title: " + title);
+        //console.log("Desc: " + desc);
+        
+        var flag = false;
+
+        for (var j = 0; j < parsedItems.length; j++)
         {
-            var item  = {title: title, desc: desc};
-            parsedItems.push(item);
+            if (parsedItems[j].title == title && parsedItems[j].desc == desc)
+            {
+                flag = true;
+                break;
+            }
+        }
+
+        if (flag == false)
+        {
+            parsedItems.push({title: title, desc: desc});  
+        }
+        else
+        {
+            $(adItems[i]).hide();
+            duplicateCount++;
         }
     }
 
-    //items.push(item);
-    //items.push({id: "3", name: "test", desc: "test"}); 
+    alert("Duplicate Count: " + duplicateCount);
 }
 
 function CheckIfExist(title, desc)
 {
-    for (i = 0; i < parsedItems.length; i++)
+    for (var j = 0; j < parsedItems.length; j++)
     {
-        
+        if (parsedItems[j].title == title && parsedItems[j].desc == desc)
+        {
+            return true;
+        }
     }
 
-    return true;
+    return false;
 }
