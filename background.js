@@ -13,8 +13,9 @@ function popUpClick(tab)
     tabId: tab.id
   }
 
-  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-  msg.tabUrl = tabs[0].url;
-  chrome.tabs.sendMessage(tab.id, msg);
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs)
+  {
+    msg.tabUrl = tabs[0].url;
+    chrome.tabs.sendMessage(tab.id, msg);
   });
 }

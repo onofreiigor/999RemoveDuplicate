@@ -1,4 +1,5 @@
 // content.js
+
 $(document).ready(function()
 {
     console.log("Main page loaded!");
@@ -19,6 +20,7 @@ function gotMessage (message, sender, sendResponse)
 }
 
 var adCount = 0;
+var minSimilar = 90;
 var parsedItems = [];
 
 function RemoveDublicateFrom999()
@@ -43,7 +45,7 @@ function RemoveDublicateFrom999()
 
         for (var j = 0; j < parsedItems.length; j++)
         {
-            if (parsedItems[j].title == title && parsedItems[j].desc == desc)
+            if (StringCompare(parsedItems[j].title, title) >= minSimilar && StringCompare(parsedItems[j].desc, desc) >= minSimilar)
             {
                 flag = true;
                 break;
@@ -57,6 +59,7 @@ function RemoveDublicateFrom999()
         else
         {
             $(adItems[i]).hide();
+            //var similar = StringCompare("test2", "test2");
             duplicateCount++;
         }
     }
@@ -64,15 +67,31 @@ function RemoveDublicateFrom999()
     alert("Duplicate Count: " + duplicateCount);
 }
 
-function CheckIfExist(title, desc)
+function StringCompare(str1, str2)
 {
-    for (var j = 0; j < parsedItems.length; j++)
+    var prcStep = 0;
+    var prcSimilar = 0;
+    var main = "";
+    var second = "";
+    if (str1.length >= str2.length)
     {
-        if (parsedItems[j].title == title && parsedItems[j].desc == desc)
+        main = str1;
+        second = str2;
+    }
+    else
+    {
+        main = str2;
+        second = str1;
+    }
+
+    prcStep = 100 / main.length;
+    for (var i = 0; i < second.length; i++)
+    {
+        if (main[i] == second[i])
         {
-            return true;
+            prcSimilar += prcStep;
         }
     }
 
-    return false;
+    return prcSimilar;
 }
